@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-
-  validates_presence_of :email
-  validates_uniqueness_of :email
+  # Include default devise modules.
+  devise :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :trackable, :validatable,
+          :confirmable
+  include DeviseTokenAuth::Concerns::User
 end
