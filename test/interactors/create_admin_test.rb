@@ -12,7 +12,7 @@ class CreateAdminTest < ActiveSupport::TestCase
   test 'successful create' do
     result = CreateAdmin.call(response: {authenticated: true}, admin: build(:admin).as_json.merge(password: '12312321312'))
     assert result.success?
-    assert result.response[:admin][:id]==User.last.id
+    assert result.response[:admin][:id]==Admin.last.id
   end
 
   test 'unsuccessful create' do
