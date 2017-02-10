@@ -3,7 +3,6 @@ class TicketTest < ActiveSupport::TestCase
 
   setup do
     @new_ticket = Ticket.new
-    @existing_ticket = tickets(:ticket1)
   end
 
   test 'Ticket class exists' do

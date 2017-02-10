@@ -29,8 +29,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'Email should be unique' do
-    @new_user.email = admins(:mostafa_admin).email
+    @new_user.email = create(:user).email
     assert_not @new_user.valid?
+  end
+
+  test 'Type should be nil' do
+    assert_nil @new_user.type
   end
 
   private
