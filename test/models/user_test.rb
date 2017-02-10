@@ -2,6 +2,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   setup do
     @new_user = User.new
+    @existing_user = users(:mostafa)
   end
 
   test 'User class exists' do
@@ -26,6 +27,15 @@ class UserTest < ActiveSupport::TestCase
 
   test 'A user has updated_at' do
     assert user_has_attribute?(:updated_at)
+  end
+
+  test 'Email should be presence' do
+    assert_not @new_user.valid?
+  end
+
+  test 'Email should be unique' do
+    @new_user.email = @existing_user.email
+    assert_not @new_user.valid?
   end
 
   private
