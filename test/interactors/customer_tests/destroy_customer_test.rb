@@ -22,6 +22,6 @@ class DestroyCustomerTest < ActiveSupport::TestCase
   test 'unsuccessful destroy' do
     result = DestroyCustomer.call(response: {}, id: @customer_to_destroy_id)
     assert_not result.success?
-    assert_nil result.response[:customer]
+    assert Customer.find_by_id(@customer_to_destroy_id)
   end
 end

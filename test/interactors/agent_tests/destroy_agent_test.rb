@@ -22,6 +22,6 @@ class DestroyAgentTest < ActiveSupport::TestCase
   test 'unsuccessful destroy' do
     result = DestroyAgent.call(response: {}, id: @agent_to_destroy_id)
     assert_not result.success?
-    assert_nil result.response[:agent]
+    assert Agent.find_by_id(@agent_to_destroy_id)
   end
 end

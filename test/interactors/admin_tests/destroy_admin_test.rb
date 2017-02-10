@@ -22,6 +22,6 @@ class DestroyAdminTest < ActiveSupport::TestCase
   test 'unsuccessful destroy' do
     result = DestroyAdmin.call(response: {}, id: @admin_to_destroy_id)
     assert_not result.success?
-    assert_nil result.response[:admin]
+    assert Admin.find_by_id(@admin_to_destroy_id)
   end
 end
