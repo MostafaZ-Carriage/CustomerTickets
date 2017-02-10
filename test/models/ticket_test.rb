@@ -57,11 +57,15 @@ class TicketTest < ActiveSupport::TestCase
     assert_not @new_ticket.valid?
   end
 
-  # test 'A closed ticket should has closer' do
-  #   ticket = create(:ticket)
-  #   ticket.status = TicketStatus::CLOSE
-  #   assert_not ticket.save
-  # end
+  test 'A ticket should have closer when closed' do
+    assert_not build(:ticket, status: TicketStatus::CLOSE).save
+  end
+
+  test 'A ticket have closer should be closed automatically' do
+    ticket = create(:ticket, closer: create(:agent))
+    ticket.save!
+    assert ticket.status == TicketStatus::CLOSE
+  end
 
   private
 
