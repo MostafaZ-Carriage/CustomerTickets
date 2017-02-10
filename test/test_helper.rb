@@ -6,6 +6,7 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 
   FactoryGirl.find_definitions
+  BULK_CREATE_SIZE = 3
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   #fixtures :all
 
