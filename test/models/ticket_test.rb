@@ -33,6 +33,6 @@ class TicketTest < ActiveSupport::TestCase
   private
 
   def ticket_has_attribute?(attribute_name)
-    @new_ticket.has_attribute?(attribute_name)
+    obj_has_attribute?(@new_ticket, attribute_name)
   end
 end

@@ -10,4 +10,8 @@ class ActiveSupport::TestCase
   def class_exists?(klass)
     klass.is_a? Class
   end
+
+  def obj_has_attribute?(obj, attribute_name)
+    obj.has_attribute?(attribute_name)
+  end
 end

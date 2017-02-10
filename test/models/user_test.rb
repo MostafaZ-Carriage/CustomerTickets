@@ -41,6 +41,6 @@ class UserTest < ActiveSupport::TestCase
   private
 
   def user_has_attribute?(attribute_name)
-    @new_user.has_attribute?(attribute_name)
+    obj_has_attribute?(@new_user, attribute_name)
   end
 end
