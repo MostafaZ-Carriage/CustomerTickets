@@ -1,5 +1,5 @@
 require 'test_helper'
-class CreateCustomerTest < ActiveSupport::TestCase
+class UpdateCustomerTest < ActiveSupport::TestCase
 
   setup do
     @new_name = 'New Name'

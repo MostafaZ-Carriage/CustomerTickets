@@ -1,5 +1,5 @@
 require 'test_helper'
-class CreateAgentTest < ActiveSupport::TestCase
+class UpdateAgentTest < ActiveSupport::TestCase
 
   setup do
     @new_name = 'New Name'

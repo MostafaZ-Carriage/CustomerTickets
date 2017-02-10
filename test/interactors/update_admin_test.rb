@@ -1,5 +1,5 @@
 require 'test_helper'
-class CreateAdminTest < ActiveSupport::TestCase
+class UpdateAdminTest < ActiveSupport::TestCase
 
   setup do
     @new_name = 'New Name'
