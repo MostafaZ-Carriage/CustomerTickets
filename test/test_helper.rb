@@ -7,4 +7,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def class_exists?(klass)
+    klass.is_a? Class
+  end
 end

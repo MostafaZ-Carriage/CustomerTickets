@@ -7,11 +7,11 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test 'Ticket class exists' do
-    assert Ticket.is_a? Class
+    assert class_exists?(Ticket)
   end
 
   test 'A ticket has title' do
-    assert @new_ticket.has_attribute?(:title)
+    assert ticket_has_attribute?(:title)
   end
 
   test 'A ticket has a default title' do
@@ -19,14 +19,20 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test 'A ticket has description' do
-    assert @new_ticket.has_attribute?(:description)
+    assert ticket_has_attribute?(:description)
   end
 
   test 'A ticket has created_at' do
-    assert @new_ticket.has_attribute?(:created_at)
+    assert ticket_has_attribute?(:created_at)
   end
 
   test 'A ticket has updated_at' do
-    assert @new_ticket.has_attribute?(:updated_at)
+    assert ticket_has_attribute?(:updated_at)
+  end
+
+  private
+
+  def ticket_has_attribute?(attribute_name)
+    @new_ticket.has_attribute?(attribute_name)
   end
 end
