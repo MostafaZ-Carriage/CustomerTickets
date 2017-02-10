@@ -14,11 +14,12 @@ class AgentTest < ActiveSupport::TestCase
   end
 
   test 'Agent has tickets' do
-    assert user_can_respond_to?(:tickets)
+    assert user_can_respond_to?(:closed_tickets)
   end
 
   test 'Agent can access his tickets'do
-    assert_not create(:agent_with_tickets).tickets.empty?
+    agent = create(:agent_with_tickets)
+    assert agent.closed_tickets==Ticket.where(closer: agent)
   end
 
   private
