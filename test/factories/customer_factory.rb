@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :customer ,aliases: [:creator] do
+  factory :customer do
     name 'Customer Name'
     email 'customer@customer.customer'
     password '123456789'

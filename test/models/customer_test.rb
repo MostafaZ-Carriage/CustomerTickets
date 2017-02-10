@@ -13,13 +13,12 @@ class CustomerTest < ActiveSupport::TestCase
     assert @new_customer.type == 'Customer'
   end
 
-  test 'A Customer has creator' do
+  test 'A Customer has tickets' do
     assert user_can_respond_to?(:tickets)
   end
 
   test 'A Customer can access his tickets'do
-    customer_with_tickets = create(:customer_with_tickets)
-    assert_not customer_with_tickets.tickets.empty?
+    assert_not create(:customer_with_tickets).tickets.empty?
   end
 
   private

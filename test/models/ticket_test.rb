@@ -3,7 +3,6 @@ class TicketTest < ActiveSupport::TestCase
 
   setup do
     @new_ticket = Ticket.new
-    @existence_ticket = create(:ticket)
   end
 
   test 'Ticket class exists' do
@@ -42,13 +41,27 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket_has_attribute?(:creator_id)
   end
 
+  test 'A ticket has closer_id' do
+    assert ticket_has_attribute?(:closer_id)
+  end
+
   test 'A ticket has creator' do
     assert ticket_can_respond_to?(:creator)
+  end
+
+  test 'A ticket has closer' do
+    assert ticket_can_respond_to?(:closer)
   end
 
   test 'A ticket should has creator' do
     assert_not @new_ticket.valid?
   end
+
+  # test 'A closed ticket should has closer' do
+  #   ticket = create(:ticket)
+  #   ticket.status = TicketStatus::CLOSE
+  #   assert_not ticket.save
+  # end
 
   private
 

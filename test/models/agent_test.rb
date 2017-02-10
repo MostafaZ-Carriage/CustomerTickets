@@ -13,9 +13,17 @@ class AgentTest < ActiveSupport::TestCase
     assert @new_agent.type == 'Agent'
   end
 
+  test 'Agent has tickets' do
+    assert user_can_respond_to?(:tickets)
+  end
+
+  test 'Agent can access his tickets'do
+    assert_not create(:agent_with_tickets).tickets.empty?
+  end
+
   private
 
-  def user_has_attribute?(attribute_name)
-    obj_has_attribute?(@new_agent, attribute_name)
+  def user_can_respond_to?(method_name)
+    obj_can_respond_to?(@new_agent, method_name)
   end
 end
