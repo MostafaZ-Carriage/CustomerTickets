@@ -71,16 +71,32 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket_has_attribute?(:creator_type)
   end
 
+  test 'A ticket has closer_type' do
+    assert ticket_has_attribute?(:closer_type)
+  end
+
   test 'A ticket has customer creator' do
-    assert build(:ticket_customer)
+    assert build(:ticket_customer).save
   end
 
   test 'A ticket has admin creator' do
-    assert build(:ticket_admin)
+    assert build(:ticket_admin).save
   end
 
-  test 'A ticket has agent creator' do
+  test 'A ticket can not has agent creator' do
     assert_not build(:ticket_agent).save
+  end
+
+  test 'A ticket can not has customer closer' do
+    assert_not build(:ticket_customer_close).save
+  end
+
+  test 'A ticket has admin closer' do
+    assert build(:ticket_admin_close).save
+  end
+
+  test 'A ticket has agent closer' do
+    assert build(:ticket_agent_close).save
   end
 
   private

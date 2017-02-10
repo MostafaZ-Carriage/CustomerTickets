@@ -9,7 +9,7 @@ FactoryGirl.define do
         tickets_count 5
       end
       after(:create) do |agent, evaluator|
-        create_list(:closed_ticket, evaluator.tickets_count, closer: agent, creator_type: 'Customer')
+        create_list(:ticket_agent_close, evaluator.tickets_count, closer: agent)
       end
     end
   end

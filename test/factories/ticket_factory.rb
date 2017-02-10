@@ -16,9 +16,25 @@ FactoryGirl.define do
     end
     factory :closed_ticket do
       association :creator, factory: :customer, strategy: :build
+      creator_type 'Customer'
       status TicketStatus::CLOSE
-      association :closer, factory: :agent, strategy: :build
+      trait :customer_closes do
+        association :closer, factory: :customer, strategy: :build
+        creator_type 'Customer'
+      end
+      trait :admin_closes do
+        association :closer, factory: :admin, strategy: :build
+        creator_type 'Admin'
+      end
+      trait :agent_closes do
+        association :closer, factory: :agent, strategy: :build
+        creator_type 'Agent'
+      end
+      factory :ticket_customer_close, traits: [:customer_closes]
+      factory :ticket_admin_close, traits: [:admin_closes]
+      factory :ticket_agent_close, traits: [:agent_closes]
     end
+
     factory :ticket_customer, traits: [:customer_creates]
     factory :ticket_admin, traits: [:admin_creates]
     factory :ticket_agent, traits: [:agent_creates]
