@@ -17,4 +17,8 @@ class ActiveSupport::TestCase
   def obj_has_attribute?(obj, attribute_name)
     obj.has_attribute?(attribute_name)
   end
+
+  def obj_can_respond_to?(obj, method_name)
+    obj.respond_to?(method_name)
+  end
 end

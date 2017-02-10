@@ -1,6 +1,7 @@
 FactoryGirl.define do
-  factory :ticket1 do
-    name 'I need a help!!'
-    email 'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla'
+  factory :ticket do
+    title 'I need a help!!'
+    description 'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla'
+    association :creator, factory: :customer
   end
 end
