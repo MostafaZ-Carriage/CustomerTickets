@@ -2,7 +2,7 @@ require 'test_helper'
 class DestroyTicketTest < ActiveSupport::TestCase
 
   setup do
-    @ticket_to_destroy_id = create(:ticket).id
+    @ticket_to_destroy_id = create(:ticket_customer).id
   end
 
   teardown do

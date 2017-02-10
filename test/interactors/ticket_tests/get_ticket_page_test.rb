@@ -2,7 +2,7 @@ require 'test_helper'
 class GetTicketPageTest < ActiveSupport::TestCase
 
   setup do
-    create_list(:ticket, BULK_CREATE_SIZE)
+    create_list(:ticket_customer, BULK_CREATE_SIZE)
   end
 
   test 'Get Ticket Page interactor exists' do

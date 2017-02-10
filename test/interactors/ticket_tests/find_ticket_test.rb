@@ -6,7 +6,7 @@ class FindTicketTest < ActiveSupport::TestCase
   end
 
   test 'successful find' do
-    new_ticket_id = create(:ticket).id
+    new_ticket_id = create(:ticket_customer).id
     result = FindTicket.call(response: {authenticated: true}, id: new_ticket_id)
     assert result.success?
     assert result.response[:ticket][:id]==new_ticket_id

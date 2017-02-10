@@ -58,13 +58,29 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test 'A ticket should have closer when closed' do
-    assert_not build(:ticket, status: TicketStatus::CLOSE).save
+    assert_not build(:ticket_customer, status: TicketStatus::CLOSE).save
   end
 
   test 'A ticket have closer should be closed automatically' do
-    ticket = create(:ticket, closer: create(:agent))
+    ticket = create(:ticket_customer, closer: create(:agent))
     ticket.save!
     assert ticket.status == TicketStatus::CLOSE
+  end
+
+  test 'A ticket has creator_type' do
+    assert ticket_has_attribute?(:creator_type)
+  end
+
+  test 'A ticket has customer creator' do
+    assert build(:ticket_customer)
+  end
+
+  test 'A ticket has admin creator' do
+    assert build(:ticket_admin)
+  end
+
+  test 'A ticket has agent creator' do
+    assert_not build(:ticket_agent).save
   end
 
   private

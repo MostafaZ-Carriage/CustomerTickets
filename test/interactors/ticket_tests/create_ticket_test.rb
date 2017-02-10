@@ -10,7 +10,7 @@ class CreateTicketTest < ActiveSupport::TestCase
   end
 
   test 'customer successfully create' do
-    result = CreateTicket.call(response: {authenticated: true}, ticket: build(:ticket, creator: create(:customer)).as_json)
+    result = CreateTicket.call(response: {authenticated: true}, ticket: build(:ticket).as_json, current_user: create(:customer))
     assert result.success?
     assert result.response[:ticket][:id]==Ticket.last.id
   end
