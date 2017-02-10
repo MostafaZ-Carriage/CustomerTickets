@@ -26,6 +26,14 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket_has_attribute?(:created_at)
   end
 
+  test 'A ticket has status' do
+    assert ticket_has_attribute?(:status)
+  end
+
+  test 'A ticket has a default status' do
+    assert @new_ticket.status == TicketStatus::OPEN
+  end
+
   test 'A ticket has updated_at' do
     assert ticket_has_attribute?(:updated_at)
   end
