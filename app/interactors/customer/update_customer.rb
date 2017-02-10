@@ -6,7 +6,7 @@ class UpdateCustomer
   end
 
   def call
-    @customer.save!(context.customer) rescue context.fail!
+    @customer.update!(context.customer) rescue context.fail!
     context.response[:customer] = @customer
   end
 end

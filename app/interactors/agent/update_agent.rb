@@ -6,7 +6,7 @@ class UpdateAgent
   end
 
   def call
-    @agent.save!(context.agent) rescue context.fail!
+    @agent.update!(context.agent) rescue context.fail!
     context.response[:agent] = @agent
   end
 end
