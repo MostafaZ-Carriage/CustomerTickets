@@ -22,4 +22,8 @@ class ActiveSupport::TestCase
   def obj_can_respond_to?(obj, method_name)
     obj.respond_to?(method_name)
   end
+
+  def response_json
+    JSON.parse(response.body)
+  end
 end

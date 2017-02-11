@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   include UsersStrongParams
-  before_action :authenticate_user!, except: [:create]
+  skip_before_action :authenticate_user!, only: [:create]
   def index
 
   end

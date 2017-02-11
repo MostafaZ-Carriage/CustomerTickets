@@ -1,5 +1,4 @@
 class AdminsController < ApplicationController
-  before_action :authenticate_user!
   include UsersStrongParams
   def index
 
@@ -10,7 +9,8 @@ class AdminsController < ApplicationController
   end
 
   def create
-
+    interactor = CreateAdmin.call(response: @response, admin: user_params)
+    render json: interactor.response, status: (interactor.success? ? :created : :not_acceptable)
   end
 
   def update

@@ -1,5 +1,4 @@
 class AgentsController < ApplicationController
-  before_action :authenticate_user!
   include UsersStrongParams
   def index
 
