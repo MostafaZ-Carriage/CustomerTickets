@@ -5,6 +5,14 @@ class Customer < User
     true
   end
 
+  def can_update_customer?(customer)
+    self.id == customer.id
+  end
+
+  def can_update_ticket?(ticket)
+    ticket.creator_id == self.id
+  end
+
   private
 
   def should_creator_present?

@@ -14,7 +14,8 @@ class UpdateAdminTest < ActiveSupport::TestCase
   end
 
   test 'successful update' do
-    result = UpdateAdmin.call(response: {authenticated: true}, admin: create(:admin).as_json.merge(name: @new_name).symbolize_keys!)
+    admin = create(:admin)
+    result = UpdateAdmin.call(response: {authenticated: true}, admin: admin.as_json.merge(name: @new_name).symbolize_keys!, current_user: admin)
     assert result.success?
     assert result.response[:admin][:name]==Admin.last.name
   end

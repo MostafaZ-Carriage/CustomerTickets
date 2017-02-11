@@ -2,7 +2,8 @@ class UpdateAgent
   include Interactor
 
   before do
-    context.fail! if context.response.blank? || context.agent.blank? || (@agent = Agent.find_by_id(context.agent[:id])).blank?
+    context.fail! if context.response.blank? || context.agent.blank? || (@agent = Agent.find_by_id(context.agent[:id])).blank? || context.current_user.blank?
+    User.current_user = context.current_user
   end
 
   def call

@@ -22,6 +22,22 @@ class Admin < User
     true
   end
 
+  def can_update_admin?(admin)
+    true
+  end
+
+  def can_update_agent?(admin)
+    true
+  end
+
+  def can_update_customer?(admin)
+    true
+  end
+
+  def can_update_ticket?(ticket)
+    true
+  end
+
   private
 
   def should_creator_present?

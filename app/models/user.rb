@@ -1,7 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules.
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  include DeviseTokenAuth::Concerns::User, AuthorizedByCreator
+  include DeviseTokenAuth::Concerns::User
+  thread_mattr_accessor :current_user, :sign_in_action
+
+  before_save :skip_confirmation!
 
   def self.can_create_ticket?
     false
@@ -24,6 +27,26 @@ class User < ApplicationRecord
   end
 
   def self.can_create_user?
+    false
+  end
+
+  def can_update_user?(user)
+    false
+  end
+
+  def can_update_admin?(user)
+    false
+  end
+
+  def can_update_agent?(user)
+    false
+  end
+
+  def can_update_customer?(user)
+    false
+  end
+
+  def can_update_ticket?(ticket)
     false
   end
 end

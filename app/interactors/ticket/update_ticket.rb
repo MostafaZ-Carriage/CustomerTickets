@@ -6,7 +6,7 @@ class UpdateTicket
     if context.ticket[:status] == TicketStatus::CLOSE && (@current_user = context.current_user).blank?
       context.fail!
     else
-      context.ticket[:closer] = context.current_user
+      context.ticket[:closer] = User.current_user = context.current_user
     end
   end
 

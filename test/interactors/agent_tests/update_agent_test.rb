@@ -14,7 +14,8 @@ class UpdateAgentTest < ActiveSupport::TestCase
   end
 
   test 'successful update' do
-    result = UpdateAgent.call(response: {authenticated: true}, agent: create(:admin_creates_agent).as_json.merge(name: @new_name).symbolize_keys!)
+    agent = create(:admin_creates_agent)
+    result = UpdateAgent.call(response: {authenticated: true}, agent: agent.as_json.merge(name: @new_name).symbolize_keys!, current_user: agent)
     assert result.success?
     assert result.response[:agent][:name]==Agent.last.name
   end

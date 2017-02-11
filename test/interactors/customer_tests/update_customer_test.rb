@@ -14,7 +14,8 @@ class UpdateCustomerTest < ActiveSupport::TestCase
   end
 
   test 'successful update' do
-    result = UpdateCustomer.call(response: {authenticated: true}, customer: create(:customer).as_json.merge(name: @new_name).symbolize_keys!)
+    customer = create(:customer)
+    result = UpdateCustomer.call(response: {authenticated: true}, customer: customer.as_json.merge(name: @new_name).symbolize_keys!, current_user: customer)
     assert result.success?
     assert result.response[:customer][:name]==Customer.last.name
   end

@@ -62,8 +62,8 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test 'A ticket have closer should be closed automatically' do
-    ticket = create(:ticket_customer, closer: create(:admin_creates_agent, creator: create(:admin)), creator: create(:customer))
-    ticket.save!
+    User.current_user = closer = create(:admin_creates_agent, creator: create(:admin))
+    ticket = create(:ticket_customer, closer: closer, creator: create(:customer))
     assert ticket.status == TicketStatus::CLOSE
   end
 

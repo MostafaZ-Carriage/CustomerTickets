@@ -1,5 +1,4 @@
 class Ticket < ApplicationRecord
-  include AuthorizedByCreator
 
   DEFAULT_TITLE = 'New Ticket'
 
