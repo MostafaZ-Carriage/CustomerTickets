@@ -14,12 +14,28 @@ class CustomerTest < ActiveSupport::TestCase
   end
 
   test 'A Customer has tickets' do
-    assert user_can_respond_to?(:open_tickets)
+    assert user_can_respond_to?(:created_tickets)
   end
 
   test 'A Customer can access his tickets'do
-    customer = create(:customer_with_tickets)
-    assert customer.open_tickets==Ticket.where(creator: customer)
+    customer = create(:customer_with_tickets, creator: create(:admin))
+    assert customer.created_tickets==Ticket.where(creator: customer)
+  end
+
+  test 'A Customer can not has customer creator' do
+    assert_not build(:customer_creates_customer).save
+  end
+
+  test 'A Customer has admin creator' do
+    assert build(:admin_creates_customer, creator: create(:admin)).save
+  end
+
+  test 'A Customer can not has agent creator' do
+    assert_not build(:agent_creates_customer, creator: create(:admin_creates_agent, creator: create(:admin))).save
+  end
+
+  test 'A Customer can not has non user creator' do
+    assert build(:customer).save
   end
 
   private

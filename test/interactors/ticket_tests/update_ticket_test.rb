@@ -14,19 +14,19 @@ class UpdateTicketTest < ActiveSupport::TestCase
   end
 
   test 'successful update' do
-    result = UpdateTicket.call(response: {authenticated: true}, ticket: @existing_ticket, current_user: create(:agent))
+    result = UpdateTicket.call(response: {authenticated: true}, ticket: @existing_ticket, current_user: create(:admin_creates_agent))
     assert result.success?
     assert result.response[:ticket][:title]==Ticket.last.title
   end
 
   test 'unsuccessful update' do
-    result = UpdateTicket.call(response: {}, ticket: @existing_ticket, current_user: create(:agent))
+    result = UpdateTicket.call(response: {}, ticket: @existing_ticket, current_user: create(:admin_creates_agent))
     assert_not result.success?
     assert_nil result.response[:ticket]
   end
 
   test 'agent successfully close ticket' do
-    result = UpdateTicket.call(response: {authenticated: true}, ticket: close_ticket!, current_user: create(:agent))
+    result = UpdateTicket.call(response: {authenticated: true}, ticket: close_ticket!, current_user: create(:admin_creates_agent))
     assert result.success?
     assert result.response[:ticket][:title]==Ticket.last.title
   end

@@ -6,7 +6,7 @@ class FindAgentTest < ActiveSupport::TestCase
   end
 
   test 'successful find' do
-    new_agent_id = create(:agent).id
+    new_agent_id = create(:admin_creates_agent).id
     result = FindAgent.call(response: {authenticated: true}, id: new_agent_id)
     assert result.success?
     assert result.response[:agent][:id]==new_agent_id

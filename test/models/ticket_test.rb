@@ -62,7 +62,7 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test 'A ticket have closer should be closed automatically' do
-    ticket = create(:ticket_customer, closer: create(:agent))
+    ticket = create(:ticket_customer, closer: create(:admin_creates_agent, creator: create(:admin)), creator: create(:customer))
     ticket.save!
     assert ticket.status == TicketStatus::CLOSE
   end
@@ -76,11 +76,11 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test 'A ticket has customer creator' do
-    assert build(:ticket_customer).save
+    assert build(:ticket_customer, creator: create(:customer)).save
   end
 
   test 'A ticket has admin creator' do
-    assert build(:ticket_admin).save
+    assert build(:ticket_admin, creator: create(:admin)).save
   end
 
   test 'A ticket can not has agent creator' do
@@ -92,11 +92,11 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test 'A ticket has admin closer' do
-    assert build(:ticket_admin_close).save
+    assert build(:ticket_admin_close, creator: create(:customer)).save
   end
 
   test 'A ticket has agent closer' do
-    assert build(:ticket_agent_close).save
+    assert build(:ticket_agent_close, creator: create(:customer)).save
   end
 
   private

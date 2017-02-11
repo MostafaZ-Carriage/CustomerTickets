@@ -29,12 +29,36 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'Email should be unique' do
-    @new_user.email = create(:user).email
+    @new_user.email = create(:customer).email
     assert_not @new_user.valid?
   end
 
   test 'Type should be nil' do
     assert_nil @new_user.type
+  end
+
+  test 'A user has creator_type' do
+    assert user_has_attribute?(:creator_type)
+  end
+
+  test 'A user has creator_id' do
+    assert user_has_attribute?(:creator_id)
+  end
+
+  test 'A user can not has customer creator' do
+    assert_not build(:customer_creates_user).save
+  end
+
+  test 'A user can not has admin creator' do
+    assert_not build(:admin_creates_user).save
+  end
+
+  test 'A user can not has agent creator' do
+    assert_not build(:agent_creates_user).save
+  end
+
+  test 'A user can not has non user creator' do
+    assert_not build(:non_user_creates_user).save
   end
 
   private

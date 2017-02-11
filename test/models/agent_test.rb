@@ -18,8 +18,24 @@ class AgentTest < ActiveSupport::TestCase
   end
 
   test 'Agent can access his tickets'do
-    agent = create(:agent_with_tickets)
+    agent = create(:agent_with_tickets, creator: create(:admin))
     assert agent.closed_tickets==Ticket.where(closer: agent)
+  end
+
+  test 'An Agent can not has customer creator' do
+    assert_not build(:customer_creates_agent).save
+  end
+
+  test 'An Agent has admin creator' do
+    assert build(:admin_creates_agent, creator: create(:admin)).save
+  end
+
+  test 'An Agent can not has agent creator' do
+    assert_not build(:agent_creates_agent).save
+  end
+
+  test 'An Agent can not has non user creator' do
+    assert_not build(:non_user_creates_agent).save
   end
 
   private

@@ -22,7 +22,7 @@ class CreateTicketTest < ActiveSupport::TestCase
   end
 
   test 'agent unsuccessfully create' do
-    result = CreateTicket.call(response: {authenticated: true}, ticket: build(:ticket).as_json, current_user: create(:agent))
+    result = CreateTicket.call(response: {authenticated: true}, ticket: build(:ticket).as_json, current_user: create(:admin_creates_agent))
     assert_not result.success?
     assert_nil result.response[:ticket]
   end

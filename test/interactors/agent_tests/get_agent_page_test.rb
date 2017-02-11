@@ -2,7 +2,7 @@ require 'test_helper'
 class GetAgentPageTest < ActiveSupport::TestCase
 
   setup do
-    (0...BULK_CREATE_SIZE).each {|i| create(:agent, email: "xxxx#{i}@xxx.xxx")}
+    (0...BULK_CREATE_SIZE).each {|i| create(:admin_creates_agent, email: "xxxx#{i}@xxx.xxx")}
   end
 
   test 'Get Agent Page interactor exists' do

@@ -2,7 +2,7 @@ require 'test_helper'
 class GetAdminPageTest < ActiveSupport::TestCase
 
   setup do
-    (0...BULK_CREATE_SIZE).each {|i| create(:admin, email: "xxxx#{i}@xxx.xxx")}
+    (0...BULK_CREATE_SIZE).each { |i| create(:admin, email: "xxxx#{i}@xxx.xxx") }
   end
 
   test 'Get Admin Page interactor exists' do
@@ -18,6 +18,6 @@ class GetAdminPageTest < ActiveSupport::TestCase
   test 'Do not send page' do
     result = GetAdminPage.call(response: {authenticated: true})
     assert result.success?
-    assert result.response[:admins].size == BULK_CREATE_SIZE
+    assert result.response[:admins].size == (BULK_CREATE_SIZE+1)
   end
 end

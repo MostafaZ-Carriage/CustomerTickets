@@ -14,21 +14,42 @@ class AdminTest < ActiveSupport::TestCase
   end
 
   test 'An Admin has open tickets' do
-    assert user_can_respond_to?(:open_tickets)
+    assert user_can_respond_to?(:created_tickets)
   end
 
   test 'An Admin can access his open tickets'do
-    admin = create(:admin_with_open_tickets)
-    assert admin.open_tickets==Ticket.where(creator: admin)
+    admin = create(:admin_with_created_tickets)
+    assert admin.created_tickets==Ticket.where(creator: admin)
   end
 
   test 'An Admin has closed tickets' do
     assert user_can_respond_to?(:closed_tickets)
   end
 
+  test 'An Admin has creator' do
+    assert user_can_respond_to?(:creator)
+  end
+
   test 'An Admin can access his closed tickets'do
     admin = create(:admin_with_closed_tickets)
     assert admin.closed_tickets==Ticket.where(closer: admin)
+  end
+
+  test 'An Admin can not has customer creator' do
+    assert_not build(:customer_creates_admin).save
+  end
+
+  test 'An Admin has admin creator' do
+    assert build(:admin).save
+  end
+
+  test 'An Admin can not has agent creator' do
+    assert_not build(:agent_creates_admin).save
+  end
+
+  test 'An Admin can not has non user creator unless it is the first admin' do
+    assert build(:non_user_creates_admin).save
+    assert_not build(:non_user_creates_admin).save
   end
 
   private

@@ -2,7 +2,7 @@ require 'test_helper'
 class DestroyAgentTest < ActiveSupport::TestCase
 
   setup do
-    @agent_to_destroy_id = create(:agent).id
+    @agent_to_destroy_id = create(:admin_creates_agent).id
   end
 
   teardown do

@@ -3,7 +3,7 @@ FactoryGirl.define do
     title 'I need a help!!'
     description 'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla'
     trait :customer_creates do
-      association :creator, factory: :customer, strategy: :build
+      association :creator, factory: :customer
       creator_type 'Customer'
     end
     trait :admin_creates do
@@ -11,24 +11,24 @@ FactoryGirl.define do
       creator_type 'Admin'
     end
     trait :agent_creates do
-      association :creator, factory: :agent, strategy: :build
+      association :creator, factory: :admin_creates_agent, strategy: :build
       creator_type 'Agent'
     end
     factory :closed_ticket do
-      association :creator, factory: :customer, strategy: :build
+      association :creator, factory: :admin_creates_customer, strategy: :build
       creator_type 'Customer'
       status TicketStatus::CLOSE
       trait :customer_closes do
-        association :closer, factory: :customer, strategy: :build
-        creator_type 'Customer'
+        association :closer, factory: :admin_creates_customer, strategy: :build
+        closer_type 'Customer'
       end
       trait :admin_closes do
         association :closer, factory: :admin, strategy: :build
-        creator_type 'Admin'
+        closer_type 'Admin'
       end
       trait :agent_closes do
-        association :closer, factory: :agent, strategy: :build
-        creator_type 'Agent'
+        association :closer, factory: :admin_creates_agent, strategy: :build
+        closer_type 'Agent'
       end
       factory :ticket_customer_close, traits: [:customer_closes]
       factory :ticket_admin_close, traits: [:admin_closes]
