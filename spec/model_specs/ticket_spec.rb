@@ -52,7 +52,7 @@ RSpec.describe Ticket, :type => :model do
   end
 
   it ' should has creator' do
-    expect(new_ticket.valid?).to eq(true)
+    expect(new_ticket.valid?).not_to eq(true)
   end
 
   it ' should have closer when closed' do
@@ -60,7 +60,7 @@ RSpec.describe Ticket, :type => :model do
   end
 
   it ' have closer should be closed automatically' do
-    User.current_user = closer = create(:admin_creates_agent, creator: create(:admin))
+    closer = create(:admin_creates_agent, creator: create(:admin))
     ticket = create(:ticket_customer, closer: closer, creator: create(:customer))
     expect(ticket.status).to eq(TicketStatus::CLOSE)
   end

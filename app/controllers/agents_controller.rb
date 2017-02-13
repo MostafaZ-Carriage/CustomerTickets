@@ -9,7 +9,7 @@ class AgentsController < ApplicationController
   end
 
   def create
-    interactor = CreateAgent.call(response: @response, agent: user_params)
+    interactor = CreateAgent.call(response: @response, agent: user_params, current_user: current_user)
     render json: interactor.response, status: (interactor.success? ? :created : :not_acceptable)
   end
 

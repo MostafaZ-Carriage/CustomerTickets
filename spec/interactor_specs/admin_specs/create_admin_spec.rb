@@ -11,7 +11,7 @@ RSpec.describe CreateAdmin do
   end
 
   it 'successful create' do
-    result = CreateAdmin.call(response: {authenticated: true}, admin: build(:admin).as_json.merge(password: '12312321312'))
+    result = CreateAdmin.call(response: {authenticated: true}, admin: build(:admin).as_json.merge(password: '12312321312'), current_user: Admin.first)
     expect(result.success?).to eq(true)
     expect(result.response[:admin][:id]).to eq(Admin.last.id)
   end

@@ -11,15 +11,6 @@ RSpec.describe 'admin session flow', :type => :request do
     assert_response :unauthorized
   end
 
-  it 'create admin' do
-    create(:admin, email: user[:email], password: user[:password])
-    operation_with_out_sign_up do
-      header = response.header
-      post '/admins/', params: {user: {email: 'admin9@admin.admin', password: '123456789', password_confirmation: '123456789'}}, headers: {uid: header['uid'], client: header['client'], 'access-token' => header['access-token']}
-      assert_response :created
-    end
-  end
-
   it 'sign in' do
     admin = create(:admin)
     sign_in({email: admin.email, password: admin.password})

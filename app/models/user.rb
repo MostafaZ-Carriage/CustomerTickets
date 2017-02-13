@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules.
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
-  thread_mattr_accessor :current_user, :sign_in_action
+  thread_mattr_accessor :sign_in_action, :sign_out_action
 
   before_save :skip_confirmation!
 

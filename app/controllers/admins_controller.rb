@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
   end
 
   def create
-    interactor = CreateAdmin.call(response: @response, admin: user_params)
+    interactor = CreateAdmin.call(response: @response, admin: user_params, current_user: current_user)
     render json: interactor.response, status: (interactor.success? ? :created : :not_acceptable)
   end
 

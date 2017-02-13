@@ -11,7 +11,7 @@ RSpec.describe CreateAgent do
   end
 
   it 'successful create' do
-    result = CreateAgent.call(response: {authenticated: true}, agent: build(:admin_creates_agent).as_json.merge(password: '12312321312'))
+    result = CreateAgent.call(response: {authenticated: true}, agent: build(:admin_creates_agent).as_json.symbolize_keys.merge(password: '12312321312'))
     expect(result.success?).to eq(true)
     expect(result.response[:agent][:id]).to eq(Agent.last.id)
   end

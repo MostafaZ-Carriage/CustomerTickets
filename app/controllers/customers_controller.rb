@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
   end
 
   def create
-    interactor = CreateCustomer.call(response: @response, customer: user_params)
+    interactor = CreateCustomer.call(response: @response, customer: user_params, current_user: current_user)
     render json: interactor.response, status: (interactor.success? ? :created : :not_acceptable)
   end
 
