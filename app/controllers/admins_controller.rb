@@ -14,7 +14,8 @@ class AdminsController < ApplicationController
   end
 
   def update
-
+    interactor = UpdateAdmin.call(response: @response, admin: user_params, current_user: current_user)
+    render json: interactor.response, status: (interactor.success? ? :accepted : :not_modified)
   end
 
   def destroy

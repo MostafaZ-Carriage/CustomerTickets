@@ -15,7 +15,8 @@ class CustomersController < ApplicationController
   end
 
   def update
-
+    interactor = UpdateCustomer.call(response: @response, customer: user_params, current_user: current_user)
+    render json: interactor.response, status: (interactor.success? ? :accepted : :not_modified)
   end
 
   def destroy
