@@ -7,14 +7,14 @@ RSpec.describe FindAdmin do
   end
 
   it 'successful find' do
-    new_admin_id = create(:admin).id
-    result = FindAdmin.call(response: {authenticated: true}, id: new_admin_id)
+    new_admin = create(:admin).as_json.symbolize_keys
+    result = FindAdmin.call(response: {authenticated: true}, user: new_admin)
     expect(result.success?).to eq(true)
-    expect(result.response[:admin][:id]).to eq(new_admin_id)
+    expect(result.response[:admin][:id]).to eq(new_admin[:id])
   end
 
   it 'unsuccessful find' do
-    result = FindAdmin.call(response: {authenticated: true}, id: -1)
+    result = FindAdmin.call(response: {authenticated: true}, user: {id: -1})
     expect(result.success?).to_not eq(true)
     expect(result.response[:admin]).to eq(nil)
   end

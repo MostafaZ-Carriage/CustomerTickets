@@ -6,7 +6,8 @@ class AgentsController < ApplicationController
   end
 
   def show
-
+    interactor = FindAgent.call(response: @response, user: user_params)
+    render json: interactor.response, status: (interactor.success? ? :ok : :not_found)
   end
 
   def create

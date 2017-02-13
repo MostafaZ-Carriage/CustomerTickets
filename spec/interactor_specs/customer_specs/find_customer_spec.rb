@@ -7,14 +7,14 @@ RSpec.describe FindCustomer do
   end
 
   it 'successful find' do
-    new_customer_id = create(:customer).id
-    result = FindCustomer.call(response: {authenticated: true}, id: new_customer_id)
+    new_customer = create(:customer).as_json.symbolize_keys
+    result = FindCustomer.call(response: {authenticated: true}, user: new_customer)
     expect(result.success?).to eq(true)
-    expect(result.response[:customer][:id]).to eq(new_customer_id)
+    expect(result.response[:customer][:id]).to eq(new_customer[:id])
   end
 
   it 'unsuccessful find' do
-    result = FindCustomer.call(response: {authenticated: true}, id: -1)
+    result = FindCustomer.call(response: {authenticated: true}, user: {id: -1})
     expect(result.success?).to_not eq(true)
     expect(result.response[:customer]).to eq(nil)
   end
