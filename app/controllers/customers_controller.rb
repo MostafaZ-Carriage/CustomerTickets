@@ -2,7 +2,8 @@ class CustomersController < ApplicationController
   include UsersStrongParams
   skip_before_action :authenticate_user!, only: [:create]
   def index
-
+    interactor = GetCustomerPage.call(response: @response, page: params[:page], per_page: params[:per_page])
+    render json: interactor.response, status: (interactor.success? ? :ok : :unprocessable_entity)
   end
 
   def show

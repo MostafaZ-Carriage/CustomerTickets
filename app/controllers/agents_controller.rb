@@ -1,7 +1,8 @@
 class AgentsController < ApplicationController
   include UsersStrongParams
   def index
-
+    interactor = GetAgentPage.call(response: @response, page: params[:page], per_page: params[:per_page])
+    render json: interactor.response, status: (interactor.success? ? :ok : :unprocessable_entity)
   end
 
   def show
