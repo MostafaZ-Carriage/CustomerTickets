@@ -19,6 +19,7 @@ class AgentsController < ApplicationController
   end
 
   def destroy
-
+    interactor = DestroyAgent.call(response: @response, agent: user_params, current_user: current_user)
+    render json: interactor.response, status: (interactor.success? ? :ok : :no_content)
   end
 end

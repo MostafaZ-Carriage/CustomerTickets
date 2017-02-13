@@ -19,6 +19,7 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-
+    interactor = DestroyAdmin.call(response: @response, admin: user_params, current_user: current_user)
+    render json: interactor.response, status: (interactor.success? ? :ok : :no_content)
   end
 end

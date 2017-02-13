@@ -38,6 +38,22 @@ class Admin < User
     true
   end
 
+  def can_destroy_admin?(user)
+    true
+  end
+
+  def can_destroy_agent?(user)
+    true
+  end
+
+  def can_destroy_customer?(user)
+    true
+  end
+
+  def can_destroy_ticket?(user)
+    true
+  end
+
   private
 
   def should_creator_present?

@@ -36,7 +36,7 @@ RSpec.describe 'customer updating user flow', :type => :request do
   it 'can update self' do
     operation do
       header = response.header
-      put "/agents/#{response_json[:id]}", params: {user: {email: 'agent119@agent.agent'}}, headers: {uid: header['uid'], client: header['client'], 'access-token' => header['access-token']}
+      put "/customers/#{response_json['data']['id']}", params: {user: {email: 'agent119@agent.agent'}}, headers: {uid: header['uid'], client: header['client'], 'access-token' => header['access-token']}
       assert_response :accepted
     end
   end

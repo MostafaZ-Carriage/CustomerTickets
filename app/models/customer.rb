@@ -13,6 +13,10 @@ class Customer < User
     ticket.creator_id == self.id
   end
 
+  def can_destroy_customer?(customer)
+    self.id == customer.id
+  end
+
   private
 
   def should_creator_present?

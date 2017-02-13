@@ -49,4 +49,24 @@ class User < ApplicationRecord
   def can_update_ticket?(ticket)
     false
   end
+
+  def can_destroy_user?(user)
+    false
+  end
+
+  def can_destroy_admin?(user)
+    false
+  end
+
+  def can_destroy_agent?(user)
+    false
+  end
+
+  def can_destroy_customer?(user)
+    false
+  end
+
+  def can_destroy_ticket?(user)
+    false
+  end
 end
