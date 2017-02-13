@@ -2,7 +2,7 @@ class CreateAdmin
   include Interactor
 
   before do
-    context.fail! if context.response.blank? || context.admin.blank?
+    context.fail! if context.response.blank? || context.admin.blank? || context.current_user.blank?
   end
 
   def call

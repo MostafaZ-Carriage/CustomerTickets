@@ -6,12 +6,13 @@ class Ticket < ApplicationRecord
 
   validates_presence_of :closer, if: proc{status == TicketStatus::CLOSE}
   validate :closer_types, if: proc {closer.present?}
-  before_save :assign_close_status, if: proc {closer.present?}
+  before_save :handle_close_status, if: proc {closer.present?}
 
   private
 
-  def assign_close_status
-    self.status = TicketStatus::CLOSE
+  def handle_close_status
+    self.closer=nil if self.status_was == TicketStatus::CLOSE && self.status == TicketStatus::OPEN
+    self.status = TicketStatus::CLOSE if self.status_was == TicketStatus::OPEN || self.status_was == nil
   end
 
   def closer_types

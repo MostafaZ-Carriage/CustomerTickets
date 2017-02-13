@@ -2,7 +2,7 @@ class CreateAgent
   include Interactor
 
   before do
-    context.fail! if context.response.blank? || context.agent.blank?
+    context.fail! if context.response.blank? || context.agent.blank? || context.current_user.blank?
   end
 
   def call
